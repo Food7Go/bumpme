@@ -69,7 +69,7 @@ else
     command=${commit#*[[}
     severity_flag=${command%:*}
     increment_flag=${command#*:}
-    increment_flag=${command%${']]'}*}
+    increment_flag=${increment_flag%"]]"*}
     echo "We need to bump the version of $severity_flag by increment_flag $increment_flag ✅"
 fi
 
@@ -101,6 +101,8 @@ else
     echo "Your git commit message does not contain a proper formatted command. ex: [[patch:1]]."
     exit 0;
 fi
+echo $severity_flag
+echo $increment_flag
 newver=$majorcur.$minorcur.$patchcur
 # npm version $newver --commit-hooks false --git-tag-version false
 echo "New version $newver is set ✅"
