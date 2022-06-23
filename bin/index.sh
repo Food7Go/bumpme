@@ -101,8 +101,8 @@ else
     echo "Your git commit message does not contain a proper formatted command. ex: [[patch:1]]."
     exit 0;
 fi
-echo $severity_flag
-echo $increment_flag
+
 newver=$majorcur.$minorcur.$patchcur
-# npm version $newver --commit-hooks false --git-tag-version false
+npm version $newver --commit-hooks false --git-tag-version false || exit 0;
+
 echo "New version $newver is set ✅"
