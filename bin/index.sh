@@ -102,5 +102,5 @@ else
     exit 0;
 fi
 newver=$majorcur.$minorcur.$patchcur
-npm version $newver --commit-hooks false --git-tag-version false
+# npm version $newver --commit-hooks false --git-tag-version false
 echo "New version $newver is set ✅"
