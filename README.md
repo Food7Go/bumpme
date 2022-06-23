@@ -9,7 +9,7 @@ That's it! You are ready to use bumpme in your project.
 # How to use it
 
 Triggering bumpme works by running `bumpme` in your terminal.
-The `bumpme` command takes several arguments that you can check by running `bumpme --help`.
+The `bumpme` command takes several arguments that you can check by running `bumpme -h`.
 `bumpme` will by default, if no arguments are passed, try to read your latest git commit message versioning insructions. The script looks for something formatted like this: `[[instruction:increment]]`. A few use case would be:
 
 - `[[patch:1]]`: would turn 1.0.0 into 1.0.1
