@@ -1,7 +1,7 @@
 {
   "name": "@food7go/bumpme",
   "description": "A simple utility that bumps the version of your package according to the last commit message.",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": "M. Gross <mg@fgood7go.com> (https://food7go.com)",
   "main": "index.js",
   "scripts": {
