@@ -1,0 +1,22 @@
+{
+  "name": "@food7go/versionbumper",
+  "description": "A simple utility that bumps the version of your package according to the last commit message.",
+  "version": "0.0.2",
+  "author": "M. Gross <mg@fgood7go.com> (https://food7go.com)",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Food7Go/versionbumper.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Food7Go/versionbumper/issues"
+  },
+  "homepage": "https://github.com/Food7Go/versionbumper#readme",
+  "bin": {
+    "bumpme": "bin/index.sh"
+  }
+}
