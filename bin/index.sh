@@ -3,14 +3,36 @@
 # functions
 print_usage() {
   printf "
-    VERSIONBUMPER\n
-    Simple lightweight utility to manage package.json version.\n\n
-    commands:\n
-    bumpme: only command that you can run with this package. Will bump your version according to your arguments.\n\n
-    flags:\n
-    -s: sets the severity of the bump. Accepts: patch, minor, major\n
-    -i: sets the increment. Accepts int value.\n
-    -h: prints this message\n\n
+    ##################################################
+    #                                                #
+    #                     BUMPME                     #
+    #                                                #
+    ##################################################
+    |                                                |
+    | Simple lightweight utility to manage versions  |
+    | in package.json files.                         |
+    |                                                |
+    |   COMMAND                                      |
+    |                                                |
+    |   bumpme                                       |
+    |   only command that you can run with this      |
+    |   package. Will bump your version according to |
+    |   your arguments.                              |
+    |                                                |
+    |   ARGUMENTS                                    |
+    |                                                |
+    |   -s                                           |
+    |   sets the severity of the bump. Accepts:      |
+    |   patch, minor, major                          |
+    |                                                |
+    |   -i                                           |
+    |   sets the increment. Accepts an int value     |
+    |                                                |
+    |   -h                                           |
+    |    prints this message :)                      |
+    |                                                |
+    ##################################################
+
     "
 }
 
@@ -50,10 +72,6 @@ else
 fi
 
 # the script can start
-printf "********************************************\n"
-printf "🤖 Automated version bump script activated 🤖\n"
-printf "********************************************\n\n"
-
 if [[ $severity_flag && $increment_flag ]]; then
     echo "Bumping with args";
 else
@@ -62,7 +80,6 @@ else
     # details used for versioning
     echo "Getting latest commit..."
     commit=`git log -1 --pretty=%B` || exit 0;
-    echo "Got latest commit ✅"
 
     # understand which case it has to handle: major, minor, hotfix
     echo "Extracting the severity and incrmeent of the commit..."
@@ -70,39 +87,39 @@ else
     severity_flag=${command%:*}
     increment_flag=${command#*:}
     increment_flag=${increment_flag%"]]"*}
-    echo "We need to bump the version of $severity_flag by increment_flag $increment_flag ✅"
+    echo "Found severity: $severity_flag"
+    echo "Found increment: $increment_flag"
 fi
 
 # gets current package version from package.json
 echo "Getting current version..."
 current=`node --eval="process.stdout.write(require('./package.json').version)"`
-echo "Got current version: $current ✅"
 
 # extract the current version values
-echo "Exploding the current version..."
+echo "Exploding current version..."
 IFS='.' read -r -a versions <<< "$current"
 majorcur=${versions[0]}
 minorcur=${versions[1]}
 patchcur=${versions[2]}
-echo "Got all component separated. ✅"
 
 # set the version in package.json
-echo "Bumping version by $increment_flag..."
+echo "Bumping $severity_flag by $increment_flag..."
 if [[ $severity_flag == "major" ]]; then
-    majorcur=$(( $majorcur + $increment_flag ))
-    minorcur=0
-    patchcur=0
+    majorcur=$(( $majorcur + $increment_flag ));
+    minorcur=0;
+    patchcur=0;
 elif [[ $severity_flag == "minor" ]]; then
     minorcur=$(( $minorcur + $increment_flag ))
     patchcur=0
 elif [[ $severity_flag == "patch" ]]; then
     patchcur=$(( $patchcur + $increment_flag ))
 else
-    echo "Your git commit message does not contain a proper formatted command. ex: [[patch:1]]."
+    echo "Your git commit message does not contain a proper formatted command. ex: [[patch:1]].";
     exit 0;
 fi
 
-newver=$majorcur.$minorcur.$patchcur
+newver=$majorcur.$minorcur.$patchcur;
 npm version $newver --commit-hooks false --git-tag-version false || exit 0;
 
-echo "New version $newver is set ✅"
+echo "New version $newver is set";
+exit 0;
